@@ -16,9 +16,6 @@ class RxSensors constructor(val context: Context){
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    val sensors: List<Sensor>
-        get() = sensorManager.getSensorList(Sensor.TYPE_ALL)
-
     fun hasSensor(sensorType: Int): Boolean {
         return sensorManager.getDefaultSensor(sensorType) != null
     }

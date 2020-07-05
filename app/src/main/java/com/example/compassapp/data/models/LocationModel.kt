@@ -1,5 +1,3 @@
-package com.example.compassapp.data.location
+package com.example.compassapp.data.models
 
-import com.example.compassapp.data.models.Coordinate
-
-class LocationModel(val coordinate: Coordinate)
+class LocationModel(var coordinate: Coordinate)

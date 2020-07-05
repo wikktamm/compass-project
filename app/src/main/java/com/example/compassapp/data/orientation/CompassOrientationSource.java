@@ -2,11 +2,10 @@ package com.example.compassapp.data.orientation;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-
 import com.example.compassapp.data.models.CompassOrientation;
 import com.example.compassapp.data.models.Coordinate;
 import com.example.compassapp.logic.RxSensors;
-
+import com.example.compassapp.utils.Constants;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -15,9 +14,9 @@ import io.reactivex.schedulers.Schedulers;
 public class CompassOrientationSource implements OrientationSource {
     private RxSensors rxSensorsClient;
 
-    private Coordinate destinationCoordinate;
+    private Coordinate destinationCoordinate = Constants.INSTANCE.getSampleCoordinate();
 
-    private Coordinate currentCoordinate;
+    private Coordinate currentCoordinate = Constants.INSTANCE.getSampleCoordinate();
 
     private float[] mGravity = new float[3];
     private float[] mGeomagnetic = new float[3];
@@ -83,8 +82,8 @@ public class CompassOrientationSource implements OrientationSource {
                             lastPolesAzimuth = azimuth;
 
                             double destinationAzimuth = azimuth -
-                                    bearing(currentCoordinate.getLatitude(), currentCoordinate.getLongtitude(),
-                                            destinationCoordinate.getLatitude(), destinationCoordinate.getLongtitude());
+                                    bearing(currentCoordinate.getLatitude(), currentCoordinate.getLongitude(),
+                                            destinationCoordinate.getLatitude(), destinationCoordinate.getLongitude());
 
                             compassOrientation.setDestinationDirection((float) destinationAzimuth);
                             compassOrientation.setLastDestinationDirection(lastDestinationAzimuth);
@@ -97,6 +96,7 @@ public class CompassOrientationSource implements OrientationSource {
                     return Flowable.just(compassOrientation);
                 });
     }
+
 
     @Override
     public void updateCurrentLocation(Coordinate position) {

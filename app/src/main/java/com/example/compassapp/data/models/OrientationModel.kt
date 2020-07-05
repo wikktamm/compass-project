@@ -1,4 +1,3 @@
 package com.example.compassapp.data.models
 
-class DirectionModel {
-}
+class OrientationModel(val orientation: CompassOrientation)
