@@ -1,6 +1,7 @@
 package com.example.compassapp.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.compassapp.data.CompassRepository
 import com.example.compassapp.data.models.CompassOrientation
@@ -12,7 +13,7 @@ import io.reactivex.Single
 
 class CompassViewModel(val repo: CompassRepository) : ViewModel() {
 
-//    var chosenLatitude = LiveData<>
+    var chosenLatitudeAndLongitude = MutableLiveData<Pair<Double,Double>>()
 
     fun getOrientationModel(): Flowable<OrientationModel> {
         return repo.orientation.map { constructOrientationModel(it) }
@@ -36,5 +37,9 @@ class CompassViewModel(val repo: CompassRepository) : ViewModel() {
 
     private fun constructLocationModel(coordinate: Coordinate): LocationModel {
         return LocationModel(coordinate)
+    }
+
+    fun saveChosenCoordinates(latitude:Double, longitude:Double) {
+        chosenLatitudeAndLongitude.postValue(Pair(latitude, longitude))
     }
 }
