@@ -5,13 +5,14 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.Handler
+import com.example.compassapp.R
 import com.example.compassapp.utils.SensorUnavailableException
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.FlowableOnSubscribe
 import java.util.*
 
-class RxSensors constructor(context: Context){
+class RxSensors constructor(val context: Context){
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -30,7 +31,7 @@ class RxSensors constructor(context: Context){
             val isFirstSensorPresent = hasSensor(sensorType1)
             val isSecondSensorPresent = hasSensor(sensorType2)
             val missingSensors = if(isFirstSensorPresent) "" else sensorType1.toString() + if(isSecondSensorPresent) "" else sensorType2.toString()
-            val format = "Required sensors are not available on this device (sensors ids): %d"
+            val format = context.getString(R.string.sensors_not_found)
             val message = String.format(Locale.getDefault(), format, missingSensors)
             return Flowable.error(SensorUnavailableException(message))
         }

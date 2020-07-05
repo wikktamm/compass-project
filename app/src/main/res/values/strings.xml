@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Compass App</string>
+    <string name="sensors_not_found">Required sensors are not available on this device (sensors ids): %1$s</string>
 </resources>

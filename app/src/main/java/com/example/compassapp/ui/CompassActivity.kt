@@ -1,4 +1,4 @@
-package com.example.compassapp
+package com.example.compassapp.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -6,17 +6,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.compassapp.R
+import com.example.compassapp.viewmodels.CompassViewModel
+import com.example.compassapp.viewmodels.CompassViewModelFactory
 
 class CompassActivity : AppCompatActivity() {
+
+    lateinit var viewModel : CompassViewModel
+    private val viewModelFactory = CompassViewModelFactory()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        if (checkForPermissions()) displayCompassFragment()
+        setContentView(R.layout.activity_compass)
+        if (checkForPermissions()) {
+            viewModel = ViewModelProvider(this, viewModelFactory).get(CompassViewModel::class.java)
+            displayCompassFragment()
+        }
         else requestPermissions()
     }
 
     private fun displayCompassFragment() {
-        TODO("Not yet implemented")
+        supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, CompassFragment()).commit()
     }
 
     private fun checkForPermissions() =
