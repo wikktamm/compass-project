@@ -13,7 +13,8 @@ import io.reactivex.Single
 
 class CompassViewModel(val repo: CompassRepository) : ViewModel() {
 
-    var chosenLatitudeAndLongitude = MutableLiveData<Pair<Double,Double>>()
+    private val _chosenLatitudeAndLongitude =  MutableLiveData<Pair<Float,Float>>()
+    var chosenLatitudeAndLongitude : LiveData<Pair<Float, Float>> = _chosenLatitudeAndLongitude
 
     fun getOrientationModel(): Flowable<OrientationModel> {
         return repo.orientation.map { constructOrientationModel(it) }
@@ -39,7 +40,7 @@ class CompassViewModel(val repo: CompassRepository) : ViewModel() {
         return LocationModel(coordinate)
     }
 
-    fun saveChosenCoordinates(latitude:Double, longitude:Double) {
-        chosenLatitudeAndLongitude.postValue(Pair(latitude, longitude))
+    fun saveChosenCoordinates(latitude:Float, longitude:Float) {
+        _chosenLatitudeAndLongitude.postValue(Pair(latitude, longitude))
     }
 }

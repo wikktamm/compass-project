@@ -12,11 +12,11 @@ import io.reactivex.Flowable
 import io.reactivex.FlowableOnSubscribe
 import java.util.*
 
-class RxSensors constructor(val context: Context){
+class RxSensors constructor(private val context: Context){
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-    fun hasSensor(sensorType: Int): Boolean {
+    private fun hasSensor(sensorType: Int): Boolean {
         return sensorManager.getDefaultSensor(sensorType) != null
     }
 

@@ -5,10 +5,12 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.compassapp.R
+import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.models.OrientationModel
 import com.example.compassapp.logic.CompassContract
-import com.example.compassapp.utils.SensorUnavailableException
+import com.example.compassapp.utils.Constants.TAG_DIALOG_UPDATE_COORDINATES
 import com.example.compassapp.utils.showErrorToastLong
 import com.example.compassapp.viewmodels.CompassViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -38,6 +40,9 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
                     { uiModel -> updateDirections(uiModel) },
                     { showOnErrorGettingDirections() })
         )
+        viewModel.chosenLatitudeAndLongitude.observe(viewLifecycleOwner, Observer { coordinates ->
+            updateDestinationLocation(coordinates.first, coordinates.second)
+        })
     }
 
     private fun unbindViewModel() {
@@ -54,6 +59,14 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
         )
     }
 
+    private fun updateDestinationLocation(latitude: Float, longitude: Float) {
+        viewModel.setDestinationLocation(
+            Coordinate(
+                latitude,
+                longitude
+            )
+        )
+    }
 
     override fun showOnErrorGettingDirections() {
         showErrorToastLong(getString(R.string.error_loading_direction))
@@ -64,7 +77,10 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
     }
 
     private fun openDirectionsDialog() {
-        UpdateDirectionDialog().show(activity!!.supportFragmentManager, "dialog_directions")
+        UpdateDirectionDialog().show(
+            activity!!.supportFragmentManager,
+            TAG_DIALOG_UPDATE_COORDINATES
+        )
     }
 
     private fun adjustArrow(azimuth: Float, currentAzimuth: Float, targetView: View) {

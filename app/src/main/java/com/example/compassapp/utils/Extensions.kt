@@ -9,8 +9,8 @@ fun Fragment.showErrorToastLong(str: String) {
     Toasty.error(requireContext(), str, Toast.LENGTH_LONG).show()
 }
 
-fun EditText.getDoubleValue(): Double {
-    return text.toString().toDouble()
+fun EditText.getFloatValue(): Float {
+    return text.toString().toFloat()
 }
 
 fun EditText.isEmpty(): Boolean {

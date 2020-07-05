@@ -29,7 +29,7 @@ class CompassLocationSource(private val rxLocation: RxLocation)  : LocationSourc
         return rxLocation.location().updates(customLocationRequest)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
-            .flatMap { position -> Observable.just(Coordinate(position.latitude, position.longitude)) }
+            .flatMap { position -> Observable.just(Coordinate(position.latitude.toFloat(), position.longitude.toFloat())) }
             .toFlowable(BackpressureStrategy.LATEST)
     }
 }
