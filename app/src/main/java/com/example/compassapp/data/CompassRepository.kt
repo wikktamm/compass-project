@@ -8,8 +8,8 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 
 class CompassRepository(
-    val orientationSource: OrientationSource,
-    val locationSource: LocationSource
+    private val orientationSource: OrientationSource,
+    private val locationSource: LocationSource
 ) : OrientationSource,
     LocationSource {
 
@@ -32,7 +32,6 @@ class CompassRepository(
     override fun getLocationUpdates(): Flowable<Coordinate> {
         return locationSource.locationUpdates
             .flatMap { coordinate ->
-                // Perform update
                 updateCurrentLocation(coordinate)
                 Flowable.just(coordinate)
             }

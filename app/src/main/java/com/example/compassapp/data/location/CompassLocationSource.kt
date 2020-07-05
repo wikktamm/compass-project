@@ -16,9 +16,7 @@ class CompassLocationSource(private val rxLocation: RxLocation)  : LocationSourc
     val customLocationRequest: LocationRequest
         get() {
             val locationRequest = LocationRequest()
-            locationRequest.interval = 2000
-            locationRequest.fastestInterval = 2000
-            locationRequest.smallestDisplacement = 10f
+            locationRequest.interval = 400
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
             return locationRequest
