@@ -12,13 +12,11 @@ import io.reactivex.schedulers.Schedulers
 
 class CompassLocationSource(private val rxLocation: RxLocation)  : LocationSource {
 
-    private
-    val customLocationRequest: LocationRequest
+    private val customLocationRequest: LocationRequest
         get() {
             val locationRequest = LocationRequest()
             locationRequest.interval = 400
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
             return locationRequest
         }
 

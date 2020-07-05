@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="Button" />
+        android:text="@string/enter_coordinates" />
 
     <ImageView
         android:id="@+id/ivDestinationArrow"
@@ -36,10 +36,10 @@
         android:layout_above="@+id/ivCompass"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:gravity="bottom"
         android:text="TextView"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="22sp" />
+        android:textSize="44sp" />
 
 </RelativeLayout>

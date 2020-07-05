@@ -22,6 +22,7 @@ import com.jakewharton.rxbinding4.view.clicks
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_compass.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
@@ -38,7 +39,6 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
         btCoordinatesDialog.clicks().throttleFirst(1500, TimeUnit.MILLISECONDS).subscribe {
             openDirectionsDialog()
         }
-
     }
 
     private fun bindViewModel() {
@@ -68,6 +68,8 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
             orientation.lastDestinationDirection,
             ivDestinationArrow
         )
+        tvAzimuth.text = "${orientation.lastPolesDirection.roundToInt()}°"
+
     }
 
     private fun updateDestinationLocation(latitude: Float, longitude: Float) {
@@ -112,10 +114,7 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
         animation.duration = 300
         animation.repeatCount = 0
         animation.fillAfter = true
-        targetView.startAnimation(animation)
-
-        tvAzimuth.text = "$currentAzimuth°"
-    }
+        targetView.startAnimation(animation) }
 
     override fun onResume() {
         super.onResume()
