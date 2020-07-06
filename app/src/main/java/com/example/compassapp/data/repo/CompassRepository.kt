@@ -1,4 +1,4 @@
-package com.example.compassapp.data
+package com.example.compassapp.data.repo
 
 import com.example.compassapp.data.models.CompassOrientation
 import com.example.compassapp.data.models.Coordinate

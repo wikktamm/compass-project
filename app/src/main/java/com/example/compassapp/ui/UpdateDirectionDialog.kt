@@ -36,7 +36,7 @@ class UpdateDirectionDialog : DialogFragment() {
 
     private fun setListeners() {
         disposable = btShowDirection.clicks().subscribe {
-            if (areCoordinatesValuesCorrect(etLatitude.toString(), etLongitude.toString())) {
+            if (areCoordinatesValuesCorrect(etLatitude.text.toString(), etLongitude.text.toString())) {
                 val latitude = etLatitude.getFloatValue()
                 val longitude = etLongitude.getFloatValue()
                 viewModel.saveChosenCoordinates(latitude, longitude)

@@ -13,11 +13,4 @@ fun EditText.getFloatValue(): Float {
     return text.toString().toFloat()
 }
 
-fun EditText.isEmpty(): Boolean {
-    return getTextContent().trim()==""
-}
-
-fun EditText.getTextContent(): String {
-    return text.toString()
-}
 
