@@ -1,5 +1,6 @@
 package com.example.compassapp.viewmodels
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,9 @@ import com.example.compassapp.data.models.CompassOrientation
 import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.models.OrientationModel
 import io.reactivex.Flowable
+import javax.inject.Inject
 
-class CompassViewModel(private val repo: CompassRepository) : ViewModel() {
+class CompassViewModel @ViewModelInject constructor(private val repo: CompassRepository) : ViewModel() {
 
     private val _chosenLatitudeAndLongitude = MutableLiveData<Pair<Float, Float>>()
     val chosenLatitudeAndLongitude: LiveData<Pair<Float, Float>>

@@ -9,8 +9,9 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class CompassLocationSource(private val rxLocation: RxLocation)  : LocationSource {
+class CompassLocationSource @Inject constructor(private val rxLocation: RxLocation)  : LocationSource {
 
     private val customLocationRequest: LocationRequest
         get() {

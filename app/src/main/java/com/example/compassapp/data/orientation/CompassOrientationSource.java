@@ -6,11 +6,16 @@ import com.example.compassapp.data.models.CompassOrientation;
 import com.example.compassapp.data.models.Coordinate;
 import com.example.compassapp.logic.RxSensors;
 import com.example.compassapp.utils.Constants;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.scopes.ActivityScoped;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+@ActivityScoped
 public class CompassOrientationSource implements OrientationSource {
     private RxSensors rxSensorsClient;
 
@@ -29,6 +34,7 @@ public class CompassOrientationSource implements OrientationSource {
 
     private float lastDestinationAzimuth;
 
+    @Inject
     public CompassOrientationSource(RxSensors rxSensors) {
         this.rxSensorsClient = rxSensors;
     }

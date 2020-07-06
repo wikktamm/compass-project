@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -16,30 +17,29 @@ import com.example.compassapp.utils.Constants.PERMISSION_FINE_COARSE
 import com.example.compassapp.viewmodels.CompassViewModel
 import com.example.compassapp.viewmodels.CompassViewModelFactory
 import com.patloew.rxlocation.RxLocation
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CompassActivity : AppCompatActivity() {
 
-    lateinit var viewModel : CompassViewModel
-    lateinit var viewModelFactory : CompassViewModelFactory
+    val viewModel: CompassViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModelFactory: CompassViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compass)
-        val rxLocation = RxLocation(this)
-        val rxSensors = RxSensors(this)
-        val locationSource = CompassLocationSource(rxLocation)
-        val orientationSource = CompassOrientationSource(rxSensors)
-        val repo = CompassRepository(orientationSource, locationSource)
-        viewModelFactory = CompassViewModelFactory(repo)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CompassViewModel::class.java)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(CompassViewModel::class.java)
         if (checkForPermissions()) {
             displayCompassFragment()
-        }
-        else requestPermissions()
+        } else requestPermissions()
     }
 
     private fun displayCompassFragment() {
-        supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, CompassFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, CompassFragment())
+            .commit()
     }
 
     private fun checkForPermissions() =
@@ -55,7 +55,11 @@ class CompassActivity : AppCompatActivity() {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == PERMISSION_FINE_COARSE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 displayCompassFragment()

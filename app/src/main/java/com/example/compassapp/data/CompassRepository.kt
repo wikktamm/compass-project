@@ -6,8 +6,9 @@ import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.orientation.OrientationSource
 import io.reactivex.Flowable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class CompassRepository(
+class CompassRepository @Inject constructor(
     private val orientationSource: OrientationSource,
     private val locationSource: LocationSource
 ) : OrientationSource,

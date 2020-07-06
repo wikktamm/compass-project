@@ -7,12 +7,15 @@ import android.hardware.SensorManager
 import android.os.Handler
 import com.example.compassapp.R
 import com.example.compassapp.utils.SensorUnavailableException
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.FlowableOnSubscribe
 import java.util.*
+import javax.inject.Inject
 
-class RxSensors constructor(private val context: Context){
+class RxSensors @Inject constructor(@ApplicationContext val context: Context){
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
