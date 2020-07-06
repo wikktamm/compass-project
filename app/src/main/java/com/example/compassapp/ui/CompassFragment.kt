@@ -91,7 +91,7 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
     private fun openDirectionsDialog() {
         UpdateDirectionDialog().show(
-            activity!!.supportFragmentManager,
+            requireActivity().supportFragmentManager,
             TAG_DIALOG_UPDATE_COORDINATES
         )
     }
@@ -111,7 +111,7 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
             0.5f
         )
 
-        animation.duration = 300
+        animation.duration = 100
         animation.repeatCount = 0
         animation.fillAfter = true
         targetView.startAnimation(animation) }

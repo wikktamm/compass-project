@@ -1,6 +1,5 @@
 package com.example.compassapp.data
 
-import com.example.compassapp.data.location.LocationSource
 import com.example.compassapp.data.models.CompassOrientation
 import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.orientation.OrientationSource
@@ -9,10 +8,9 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class CompassRepository @Inject constructor(
-    private val orientationSource: OrientationSource,
-    private val locationSource: LocationSource
-) : OrientationSource,
-    LocationSource {
+    private val orientationSource: OrientationSource
+) : OrientationSource
+{
 
     override fun updateCurrentLocation(position: Coordinate?) {
         orientationSource.updateCurrentLocation(position)
@@ -28,13 +26,5 @@ class CompassRepository @Inject constructor(
 
     override fun getDestinationLocation(): Single<Coordinate> {
         return orientationSource.destinationLocation
-    }
-
-    override fun getLocationUpdates(): Flowable<Coordinate> {
-        return locationSource.locationUpdates
-            .flatMap { coordinate ->
-                updateCurrentLocation(coordinate)
-                Flowable.just(coordinate)
-            }
     }
 }

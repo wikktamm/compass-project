@@ -2,36 +2,24 @@ package com.example.compassapp.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.compassapp.R
-import com.example.compassapp.data.CompassRepository
-import com.example.compassapp.data.location.CompassLocationSource
-import com.example.compassapp.data.orientation.CompassOrientationSource
-import com.example.compassapp.logic.RxSensors
 import com.example.compassapp.utils.Constants.PERMISSION_FINE_COARSE
 import com.example.compassapp.viewmodels.CompassViewModel
-import com.example.compassapp.viewmodels.CompassViewModelFactory
-import com.patloew.rxlocation.RxLocation
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CompassActivity : AppCompatActivity() {
 
     val viewModel: CompassViewModel by viewModels()
 
-    @Inject
-    lateinit var viewModelFactory: CompassViewModelFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compass)
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(CompassViewModel::class.java)
         if (checkForPermissions()) {
             displayCompassFragment()
         } else requestPermissions()
