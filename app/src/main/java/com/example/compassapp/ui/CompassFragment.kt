@@ -1,11 +1,6 @@
 package com.example.compassapp.ui
 
-import android.content.Context
-import android.content.Context.VIBRATOR_SERVICE
-import android.os.Build
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
@@ -15,6 +10,7 @@ import com.example.compassapp.R
 import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.models.OrientationModel
 import com.example.compassapp.logic.CompassContract
+import com.example.compassapp.utils.Constants.DELAY_ADJUST_ARROW_POSITION
 import com.example.compassapp.utils.Constants.TAG_DIALOG_UPDATE_COORDINATES
 import com.example.compassapp.utils.showErrorToastLong
 import com.example.compassapp.viewmodels.CompassViewModel
@@ -59,9 +55,6 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
     override fun updateDirections(orientationModel: OrientationModel) {
         val orientation = orientationModel.orientation
-        if(orientation.lastDestinationDirection > 89f &&orientation.lastDestinationDirection < 91f){
-            shakeIt(requireContext())
-        }
         adjustArrow(orientation.polesDirection, orientation.lastPolesDirection, ivCompass)
         adjustArrow(
             orientation.destinationDirection,
@@ -69,7 +62,6 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
             ivDestinationArrow
         )
         tvAzimuth.text = "${orientation.lastPolesDirection.roundToInt()}°"
-
     }
 
     private fun updateDestinationLocation(latitude: Float, longitude: Float) {
@@ -96,14 +88,6 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
         )
     }
 
-    private fun shakeIt(context: Context) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            (context.getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(VibrationEffect.createOneShot(150, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            (context.getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(150)
-        }
-    }
-
     private fun adjustArrow(azimuth: Float, currentAzimuth: Float, targetView: View) {
         val animation = RotateAnimation(
             -currentAzimuth, -azimuth,
@@ -111,10 +95,11 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
             0.5f
         )
 
-        animation.duration = 100
+        animation.duration = DELAY_ADJUST_ARROW_POSITION
         animation.repeatCount = 0
         animation.fillAfter = true
-        targetView.startAnimation(animation) }
+        targetView.startAnimation(animation)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -126,3 +111,4 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
         unbindViewModel()
     }
 }
+

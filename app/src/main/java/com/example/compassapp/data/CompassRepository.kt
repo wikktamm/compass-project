@@ -6,7 +6,9 @@ import com.example.compassapp.data.orientation.OrientationSource
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CompassRepository @Inject constructor(
     private val orientationSource: OrientationSource
 ) : OrientationSource

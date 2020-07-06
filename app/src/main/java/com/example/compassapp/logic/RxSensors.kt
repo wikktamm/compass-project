@@ -14,7 +14,9 @@ import io.reactivex.Flowable
 import io.reactivex.FlowableOnSubscribe
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RxSensors @Inject constructor(@ApplicationContext val context: Context){
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager

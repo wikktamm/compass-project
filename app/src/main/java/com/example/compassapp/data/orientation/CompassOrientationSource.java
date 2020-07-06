@@ -8,6 +8,7 @@ import com.example.compassapp.logic.RxSensors;
 import com.example.compassapp.utils.Constants;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import dagger.hilt.android.scopes.ActivityScoped;
 import io.reactivex.Flowable;
