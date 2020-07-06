@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.compassapp.data.orientation.CompassOrientationSource
 import com.example.compassapp.data.orientation.OrientationSource
 import com.example.compassapp.logic.RxSensors
-import com.patloew.rxlocation.RxLocation
+//import com.patloew.rxlocation.RxLocation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,10 +16,10 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 class ApplicationModule {
 
-    @Singleton
-    @Provides
-    fun provideRxLocationClient(@ApplicationContext context: Context): RxLocation =
-        RxLocation(context)
+//    @Singleton
+//    @Provides
+//    fun provideRxLocationClient(@ApplicationContext context: Context): RxLocation =
+//        RxLocation(context)
 
     @Singleton
     @Provides
