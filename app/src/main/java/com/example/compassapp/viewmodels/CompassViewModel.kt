@@ -9,6 +9,7 @@ import com.example.compassapp.data.models.CompassOrientation
 import com.example.compassapp.data.models.Coordinate
 import com.example.compassapp.data.models.OrientationModel
 import io.reactivex.Flowable
+import javax.inject.Singleton
 
 class CompassViewModel @ViewModelInject constructor(private val repo: CompassRepository) : ViewModel() {
 

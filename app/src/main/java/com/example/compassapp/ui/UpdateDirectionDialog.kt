@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.compassapp.R
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.dialog_update_direction.*
 @AndroidEntryPoint
 class UpdateDirectionDialog : DialogFragment() {
 
-    private val viewModel: CompassViewModel by viewModels()
+    private lateinit var viewModel: CompassViewModel
     var disposable: Disposable? = null
 
     override fun onCreateView(
@@ -32,14 +33,18 @@ class UpdateDirectionDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel = (activity as CompassActivity).viewModel
-        restoreData()
+        viewModel = (activity as CompassActivity).viewModel
         setListeners()
+        restoreData()
     }
 
     private fun setListeners() {
         disposable = btShowDirection.clicks().subscribe {
-            if (areCoordinatesValuesCorrect(etLatitude.text.toString(), etLongitude.text.toString())) {
+            if (areCoordinatesValuesCorrect(
+                    etLatitude.text.toString(),
+                    etLongitude.text.toString()
+                )
+            ) {
                 val latitude = etLatitude.getFloatValue()
                 val longitude = etLongitude.getFloatValue()
                 viewModel.saveChosenCoordinates(latitude, longitude)

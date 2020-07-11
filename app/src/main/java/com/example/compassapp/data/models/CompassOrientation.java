@@ -12,6 +12,14 @@ public final class CompassOrientation {
     public CompassOrientation() {
     }
 
+    public CompassOrientation(float destinationDirection, float lastDestinationDirection, float polesDirection, float lastPolesDirection) {
+
+        this.destinationDirection = destinationDirection;
+        this.lastDestinationDirection = lastDestinationDirection;
+        this.polesDirection = polesDirection;
+        this.lastPolesDirection = lastPolesDirection;
+    }
+
     public float getDestinationDirection() {
         return destinationDirection;
     }

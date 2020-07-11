@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,11 +28,11 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
     private var disposable = CompositeDisposable()
 
-    private val viewModel: CompassViewModel by viewModels()
+    private lateinit var  viewModel: CompassViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel = (activity as CompassActivity).viewModel
         setListeners()
+        viewModel = (activity as CompassActivity).viewModel
     }
 
     private fun setListeners() {

@@ -2,11 +2,14 @@ package com.example.compassapp.data.orientation;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+
 import com.example.compassapp.data.models.CompassOrientation;
 import com.example.compassapp.data.models.Coordinate;
 import com.example.compassapp.logic.RxSensors;
 import com.example.compassapp.utils.Constants;
+
 import javax.inject.Inject;
+
 import dagger.hilt.android.scopes.ActivityScoped;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -26,7 +29,6 @@ public class CompassOrientationSource implements OrientationSource {
     private float[] I = new float[9];
 
     private float azimuth;
-
     private float lastPolesAzimuth;
 
     private float lastDestinationAzimuth;
@@ -100,14 +102,13 @@ public class CompassOrientationSource implements OrientationSource {
                 });
     }
 
-
     @Override
     public void updateCurrentLocation(Coordinate position) {
         this.currentCoordinate = position;
     }
 
     @Override
-    public Single<Coordinate> getDestinationLocation(){
+    public Single<Coordinate> getDestinationLocation() {
         return Single.just(destinationCoordinate);
     }
 

@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class CompassActivity : AppCompatActivity() {
 
     val viewModel: CompassViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compass)
