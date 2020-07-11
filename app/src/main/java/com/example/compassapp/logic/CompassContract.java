@@ -7,6 +7,4 @@ public interface CompassContract {
     void updateDirections(OrientationModel orientation);
 
     void showOnErrorGettingDirections();
-
-    void showOnErrorGettingLocation();
 }

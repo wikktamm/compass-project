@@ -6,10 +6,7 @@ import com.example.compassapp.data.models.CompassOrientation;
 import com.example.compassapp.data.models.Coordinate;
 import com.example.compassapp.logic.RxSensors;
 import com.example.compassapp.utils.Constants;
-
 import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import dagger.hilt.android.scopes.ActivityScoped;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
@@ -21,7 +18,6 @@ public class CompassOrientationSource implements OrientationSource {
     private RxSensors rxSensorsClient;
 
     private Coordinate destinationCoordinate = Constants.INSTANCE.getSampleCoordinate();
-
     private Coordinate currentCoordinate = Constants.INSTANCE.getSampleCoordinate();
 
     private float[] mGravity = new float[3];

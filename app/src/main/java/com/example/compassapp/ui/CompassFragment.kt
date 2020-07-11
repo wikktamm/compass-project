@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.compassapp.R
 import com.example.compassapp.data.models.Coordinate
@@ -15,19 +16,21 @@ import com.example.compassapp.utils.Constants.TAG_DIALOG_UPDATE_COORDINATES
 import com.example.compassapp.utils.showErrorToastLong
 import com.example.compassapp.viewmodels.CompassViewModel
 import com.jakewharton.rxbinding4.view.clicks
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_compass.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
     private var disposable = CompositeDisposable()
 
-    private lateinit var viewModel: CompassViewModel
+    private val viewModel: CompassViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as CompassActivity).viewModel
+//        viewModel = (activity as CompassActivity).viewModel
         setListeners()
     }
 
@@ -75,10 +78,6 @@ class CompassFragment : Fragment(R.layout.fragment_compass), CompassContract {
 
     override fun showOnErrorGettingDirections() {
         showErrorToastLong(getString(R.string.error_loading_direction))
-    }
-
-    override fun showOnErrorGettingLocation() {
-        showErrorToastLong(getString(R.string.error_loading_location))
     }
 
     private fun openDirectionsDialog() {

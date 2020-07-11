@@ -5,18 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.example.compassapp.R
 import com.example.compassapp.utils.areCoordinatesValuesCorrect
 import com.example.compassapp.utils.getFloatValue
 import com.example.compassapp.utils.showErrorToastLong
 import com.example.compassapp.viewmodels.CompassViewModel
 import com.jakewharton.rxbinding4.view.clicks
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.android.synthetic.main.dialog_update_direction.*
 
+@AndroidEntryPoint
 class UpdateDirectionDialog : DialogFragment() {
 
-    private lateinit var viewModel: CompassViewModel
+    private val viewModel: CompassViewModel by viewModels()
     var disposable: Disposable? = null
 
     override fun onCreateView(
@@ -29,7 +32,7 @@ class UpdateDirectionDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as CompassActivity).viewModel
+//        viewModel = (activity as CompassActivity).viewModel
         restoreData()
         setListeners()
     }

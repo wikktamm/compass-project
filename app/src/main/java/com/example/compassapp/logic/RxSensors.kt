@@ -1,13 +1,11 @@
 package com.example.compassapp.logic
 
 import android.content.Context
-import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
 import android.os.Handler
 import com.example.compassapp.R
 import com.example.compassapp.utils.SensorUnavailableException
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
